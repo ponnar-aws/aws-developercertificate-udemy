@@ -32,6 +32,19 @@ connect to ec2-user@<ip of ec2> using putty
 
 open the chrome and check the ec2 ip or public url to see the page
 ```
+### create EBS volume and attach to the EC2
+create volume of desired size // Note ec2 and volume to be same AZ to attach. if volume and EC2 in different location, cant attach the volume
+once created, we see available status. right click-> attach volume to the ec2 instance. once attached, ssh to instance and command lsblk. we see new volume displayed.
+
+### How to attach the EBS volume to linux and make use as file system
+```
+lsblk // list the default disk along with attached disk. 
+mkfs.ext4 /dev/xvdf  // we are formating the new volume to filesystem. Note that if take image of EBS it is already a file system so formating that will delete all the data in it.
+mkdir /app
+mount -t ext4 /dev/xvdf /app
+df -h
+```
+
 ## Route53 And Elastic Load balancer ELB
 - types: application LB, Network LB, Classic LB
 - x-forwarded-For header provides the public ip of the end user to the ec2 which runs behind the LB.
@@ -63,20 +76,61 @@ tar xvfz apache-tomcat-8.5.32.tar.gz
 ./bin/startup.sh  // starting tomcat
 ps -ef | grep tomcat
 wget http://localhost:8080 // it gives default index page
+./bin/shutdown.sh
+```
+
+```
+To manage tomcat admin console:
+add the entry at the end to conf/tomcat-user.xml
+<role rolename="manager-gui"/>
+ <user username="admin" password="admin" roles="manager-gui"/>
+ Now you can browse the tomcat admin page with these user/password
+```
+In real world, we need to create a less priviledged user and run tomcat with that for security reasons
+```
+todo
 ```
 #### add http 8080 port in security group
 add any tcp -> add 8080 in that
 
-### How to attach the volume to linux and make use as file system
-```
-lsblk
-mkfs.ext4 /dev/xvdf
-mkdir /app
-mount -t ext4 /dev/xvdf /app
-df -h
-```
-
 ### how to move region to region
 shapshot is created which can be region to region
 (we can create script to backup regularly from 1 region to other region)
+
+# week2
+### using CLI 
+you can do everything in cli as well like in web console
+```
+>aws s3 ls // this gives error for configure secret key
+>aws configure // it asks for access id  & key
+go to aws console and create a user with access. create a secret id and key
+this is secret key: 3gBA1jJkcG97pN6t2SwkDURe4XU+HR3/FOcNkKf/ get the id AK***7LA from console.
+>aws s3 ls  // shows nothing ie there is nothing in s3 storage
+>aws s3 mb s3://poppy-2018jul   // make bucket you can check in console as well
+> aws s3 cp hello.txt s3://poppy-2018jul   // create a text file and copy paste that into s3. we can see this in web also. make pulic to the resource before we see via web
+https://docs.aws.amazon.com/cli/latest/index.html // all the CLI commands
+
+```
+### EC2 with S3 bucket
+S3 and EC2 are different resources in AWS. 
+2 ways to communicate:
+1. accesskey created for user can access S3.
+2. create role(IAM role)(can create for EC2,lamda etc) and attach to EC2 so that EC2 can access.
+```
+mysecuritycredential-> create a role for resource EC2 -> attach policy(like s3 fullaccess)
+in ec2 instance -> actions->instance setting -> attach IAM role 
+>cd ~/.aws  // this stores the secret key values in that. remove that to make use of IAM role. For windows, >dir "%UserProfile%\.aws"
+>ls
+> rm credentials config 
+>aws s3 ls // now we able to see the s3 data without secret key
+```
+exam Tips: roles are preferred over secret key for security. immediate effect applied when role is added to running instance as well.
+
+### RDS relational database service
+it is also linux box with DB servers installed in default. currently supported DB are MS sql server, oracle, mysql,postgre, amazon aurora, mariaDB
+basics :non relational db - collection(table), document(rows),key value pair json(fields)
+basics :data warehousing - business intelligence - analytical processing. large queries. 
+basic term : elastic cache - in-memory cache(for some frequent data) instead of relying on slower disk-based DB.supports- memcached/redis
+
+
 
