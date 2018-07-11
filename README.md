@@ -1,5 +1,12 @@
 # aws-week1
 
+### security IAM  - identity access management
+1. policy eg: s3fullaccess, admin access,
+2. user - attach user with policy
+3. roles - attach policy with roles. eg. s3 access which makes ec2 to communicate with s3
+4. group - attach policy with group. group has many users in it. these policies embed to the user policies
+5. security key - cli/program access to ec2/any resource or ec2 can communicate with s3/other resource
+
 ### Install java and tomcat in EC2
 ```
 yum list installed
