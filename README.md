@@ -123,6 +123,8 @@ in ec2 instance -> actions->instance setting -> attach IAM role
 >ls
 > rm credentials config 
 >aws s3 ls // now we able to see the s3 data without secret key
+> aws s3 cp hello.txt s3://<s3 url>
+> aws s3 ls s3://<s3 url>
 ```
 exam Tips: roles are preferred over secret key for security. immediate effect applied when role is added to running instance as well.
 
@@ -131,6 +133,16 @@ it is also linux box with DB servers installed in default. currently supported D
 basics :non relational db - collection(table), document(rows),key value pair json(fields)
 basics :data warehousing - business intelligence - analytical processing. large queries. 
 basic term : elastic cache - in-memory cache(for some frequent data) instead of relying on slower disk-based DB.supports- memcached/redis
-
+```
+create rds in web console by providing dbinstance name, db name(connection name is already available). we selected mysql version of rds.
+create new ec2 instance to run script(advanced tab while creating ). below script
+#!/bin/bash
+yum install httpd php php-mysql -y
+chkconfig httpd on
+service httpd start 
+echo "<?php phpinfo();>" > /var/www/html/index.php
+cd /var/www/html
+wget s3://<../connect.php>
+```
 
 
