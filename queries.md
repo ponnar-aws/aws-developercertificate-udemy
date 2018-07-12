@@ -12,3 +12,4 @@
 12. how to move 1 AZ to other zone?
 13. How to move from 1 region to other? can create snapshot and move
 14. diff of AMI image and snapshot? shapshot is encrypted one resides in S3. At times we need only prod data not the other. using snapshot we can selectivly pick the required volumes. AMI usually has all image with all the data in it. storing images/snapshots incur cost so depends on the situation we choose bw them.
+15. how to migrate data from RDS to outside/ outside to RDS?
