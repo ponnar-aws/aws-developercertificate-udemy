@@ -144,5 +144,7 @@ echo "<?php phpinfo();>" > /var/www/html/index.php
 cd /var/www/html
 wget s3://<../connect.php>
 ```
-
+Note: this auto script is not woring for me. And php is also couldnt complete
+#### connectin rds from ec2
+modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group
 
