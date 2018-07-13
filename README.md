@@ -148,3 +148,13 @@ Note: this auto script is not woring for me. And php is also couldnt complete
 #### connectin rds from ec2
 modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group
 
+### RDP Multi AZ & Read replica
+2 Types of backups: 
+1. Automated Backup - enabled default, take daily snapshot with transaction logs for retention period(0-35 days).
+if you have 10gb RDS instance,you get 10GB worth of S3 storage as well. backups are stored in that s3. backups are happening daily.
+2. Database snapshots - we need to do manually the snapshots. its available even after our rds deleted.
+
+when you restore the RDS(auto or manual), new instance is created ie it has new url.
+encryption is supported. enryption is done by AWS key management.
+
+
