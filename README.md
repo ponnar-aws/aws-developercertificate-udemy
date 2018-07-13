@@ -159,11 +159,15 @@ when you restore the RDS(auto or manual), new instance is created ie it has new 
 encryption is supported. enryption is done by AWS key management.
 tips: For encryption, create copy of DB snapshot and enable encryption and create instance.
 
-Multi AZ - for disastar recovery not for performance. for performance, use read replica.
+Multi AZ - for disastar recovery not for performance. for performance, use read replica.scale horizontal
 eg: 1 instance in 1 location other in different location.
-Read replica -scaling from primary rds prod - onlyread- asyncronous replication-  For performance improvement. can have upto 5 read replica and usually most of queries are read query. automatically data duplicates in read replica instance. can have read replica that have multi AZ or in different region. has own DNS endpoint.
+Read replica -scaling from primary rds prod - onlyread- asyncronous replication-  For performance improvement. can have upto 5 read replica and usually most of queries are read query. automatically data duplicates in read replica instance. can have read replica that have multi AZ or in different region. has own DNS endpoint. scale vertical.
 
-Memcached - object cache
+### Elastic cached 
+in-memory cache in cloud. improves performance of web application by retrive info from in-mem cache instead of slow disks. can store frequent info to these cache.
+1. Memcached - object cache that can grow and shrink similar to ec2.
+2. redis - popular open source key-value store. supports master-slave and multi AZ
+Tip: when to use memcached or redis?
 
 
 
