@@ -144,11 +144,12 @@ echo "<?php phpinfo();>" > /var/www/html/index.php
 cd /var/www/html
 wget s3://<../connect.php>
 ```
-Note: this auto script is not woring for me. And php is also couldnt complete
+Note: this auto script is not woring for me. And php is also couldnt complete.
+I needed to restart the instance to see php installed.
 #### connectin rds from ec2
 modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group
 
-### RDP Multi AZ & Read replica
+### RDP Multi AZ & Read replica -- must questions in this segment
 2 Types of backups: 
 1. Automated Backup - enabled default, take daily snapshot with transaction logs for retention period(0-35 days).
 if you have 10gb RDS instance,you get 10GB worth of S3 storage as well. backups are stored in that s3. backups are happening daily.
@@ -156,5 +157,13 @@ if you have 10gb RDS instance,you get 10GB worth of S3 storage as well. backups 
 
 when you restore the RDS(auto or manual), new instance is created ie it has new url.
 encryption is supported. enryption is done by AWS key management.
+tips: For encryption, create copy of DB snapshot and enable encryption and create instance.
+
+Multi AZ - for disastar recovery not for performance. for performance, use read replica.
+eg: 1 instance in 1 location other in different location.
+Read replica -scaling from primary rds prod - onlyread- asyncronous replication-  For performance improvement. can have upto 5 read replica and usually most of queries are read query. automatically data duplicates in read replica instance. can have read replica that have multi AZ or in different region. has own DNS endpoint.
+
+Memcached - object cache
+
 
 
