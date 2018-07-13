@@ -166,7 +166,7 @@ Read replica -scaling from primary rds prod - onlyread- asyncronous replication-
 ### Elastic cached 
 in-memory cache in cloud. improves performance of web application by retrive info from in-mem cache instead of slow disks. can store frequent info to these cache.
 1. Memcached - object cache that can grow and shrink similar to ec2.
-2. redis - popular open source key-value store. supports master-slave and multi AZ
+2. redis - popular open source key-value store. supports master-slave and multi AZ. can used for OLAP/ leader board.
 Tip: when to use memcached or redis?
 
 
