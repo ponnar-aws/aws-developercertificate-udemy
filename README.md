@@ -169,6 +169,20 @@ in-memory cache in cloud. improves performance of web application by retrive inf
 2. redis - popular open source key-value store. supports master-slave and multi AZ. can used for OLAP/ leader board.
 Tip: when to use memcached or redis?
 
+## S3 storage
+S3 - storage service . not region specific global so name also unique for globally.
+storage of object based (key- file id and value-data). unlimited storage. spread across region for backup automatically. allows versioning.
+data consistency : when upload file it is availble instantly. when update or delete it takes some tiem to reflect.
+access for S3 : 
+default access is private(only owner has access). 
+how others resource like ec2 or person can access S3? 
+S3 and EC2 are different resources in AWS. 
+2 ways to communicate:
+1. accesskey created for user can access S3.
+2. create role(IAM role)(can create for EC2,lamda etc) and attach to EC2 so that EC2 can access.
+can create bucket policy in permission tab.
+how one s3 access other resource?
+
 ## Serverless computing
 
 
