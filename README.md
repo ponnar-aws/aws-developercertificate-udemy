@@ -183,6 +183,16 @@ S3 and EC2 are different resources in AWS.
 can create bucket policy in permission tab.
 how one s3 access other resource?
 
+#### encryption while upload 
+if sirverside encryption mandate in upload time, 
+x-amz-server-side-encryption header is used in PUT request.
+2 encryption:
+x-amz-server-side-encryption : AES256(s3 managed) or ams:kms(kms managed)
+
+## S3 as static webpage hosting
+
+
+
 ## Serverless computing
 
 
