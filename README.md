@@ -169,5 +169,8 @@ in-memory cache in cloud. improves performance of web application by retrive inf
 2. redis - popular open source key-value store. supports master-slave and multi AZ. can used for OLAP/ leader board.
 Tip: when to use memcached or redis?
 
+## Serverless computing
+
+
 
 
