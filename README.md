@@ -199,6 +199,7 @@ CORS - to access files bw 2 S3 buckets.
 
 ### CloudFront
 independent of AZ/regions. there are over 100 cloudfronts available.
+2 types: web and RTMB(for media)
 
 S3 optimization:
 1. use cloud front for GET intensive 
