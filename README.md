@@ -18,7 +18,7 @@ EC2 is simply a virtual machine with different RAM config depends on the usage. 
 - we can create Elastic block storage(EBS) and attach to the EC2
 - create security group (inbound and outbound protocols)
 - use ssh to connect. dwn .pem file to connect  into the ec2. for windows, create ppk file from .pem file and connect using putty.
-
+Topics not covered in EC2:::  auto scaling in ec2. 
 ```
 connect to ec2-user@<ip of ec2> using putty
 > sudo su // to root user
@@ -148,6 +148,7 @@ Note: this auto script is not woring for me. And php is also couldnt complete.
 I needed to restart the instance to see php installed.
 #### connectin rds from ec2
 modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group
+doubt::: in ec2 we add iam role(s3fullaccess) so that we connected to s3. In S3 also we can restrict who can access. how rds didnt follow such step.
 
 ### RDP Multi AZ & Read replica -- must questions in this segment
 2 Types of backups: 
@@ -170,6 +171,7 @@ in-memory cache in cloud. improves performance of web application by retrive inf
 1. Memcached - object cache that can grow and shrink similar to ec2.
 2. redis - popular open source key-value store. supports master-slave and multi AZ. can used for OLAP/ leader board.
 Tip: when to use memcached or redis?
+Topic not covered::: elastic cached
 
 ## S3 storage
 S3 - storage service . not region specific global so name also unique for globally.
@@ -205,6 +207,10 @@ S3 optimization:
 1. use cloud front for GET intensive 
 2. mixed contents - avoid sequential key names . rendam names.
 
+topics not covered :
+EFS - elastic file system - can be considered as shared location. EFS can be attached multiple EC2 at a time.
+storage gateway - useful when migration.
+volume gateway - migration helpful. some process in on premise other in aws.
 
 ## Serverless computing
 
