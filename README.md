@@ -154,6 +154,8 @@ modify the security group of RDS. add inbound and modify to add security group o
 1. Automated Backup - enabled default, take daily snapshot with transaction logs for retention period(0-35 days).
 if you have 10gb RDS instance,you get 10GB worth of S3 storage as well. backups are stored in that s3. backups are happening daily.
 2. Database snapshots - we need to do manually the snapshots. its available even after our rds deleted.
+doubt : snapshot includes all the data?? 
+automatic backup contains data as well?? 
 
 when you restore the RDS(auto or manual), new instance is created ie it has new url.
 encryption is supported. enryption is done by AWS key management.
@@ -182,6 +184,8 @@ S3 and EC2 are different resources in AWS.
 2. create role(IAM role)(can create for EC2,lamda etc) and attach to EC2 so that EC2 can access.
 can create bucket policy in permission tab.
 how one s3 access other resource?
+1. using CORS we can share the resources
+2. 
 
 #### encryption while upload 
 if sirverside encryption mandate in upload time, 
@@ -190,7 +194,15 @@ x-amz-server-side-encryption header is used in PUT request.
 x-amz-server-side-encryption : AES256(s3 managed) or ams:kms(kms managed)
 
 ## S3 as static webpage hosting
+we can make s3 files to host static content. publicaly available.
+CORS - to access files bw 2 S3 buckets.
 
+### CloudFront
+independent of AZ/regions. there are over 100 cloudfronts available.
+
+S3 optimization:
+1. use cloud front for GET intensive 
+2. mixed contents - avoid sequential key names . rendam names.
 
 
 ## Serverless computing
