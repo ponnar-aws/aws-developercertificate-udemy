@@ -147,8 +147,10 @@ wget s3://<../connect.php>
 Note: this auto script is not woring for me. And php is also couldnt complete.
 I needed to restart the instance to see php installed.
 #### connectin rds from ec2
-modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group
+1 modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group
 doubt::: in ec2 we add iam role(s3fullaccess) so that we connected to s3. In S3 also we can restrict who can access. how rds didnt follow such step.
+2 we can use SSH tunnelling. EC2 is publically accessable. From workbench, Standard TCP/IP over SSH option. give EC2 detail and my sql detail. idea is from EC2 we can connect mysql. may be both mysql and ec2 in same subnet group.
+3 we can set as public while creating rds. then connect using workbench. vpc -rdslaunch wizaard is used in youtube video instead of default.
 
 ### RDP Multi AZ & Read replica -- must questions in this segment
 2 Types of backups: 
