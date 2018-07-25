@@ -1,4 +1,4 @@
-# aws-week1
+# aws-sessions
 
 ## security IAM  - identity access management
 1. policy eg: s3fullaccess, admin access,
@@ -147,10 +147,16 @@ wget s3://<../connect.php>
 Note: this auto script is not woring for me. And php is also couldnt complete.
 I needed to restart the instance to see php installed.
 #### connectin rds from ec2
-1 modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group
+EC2 :internet - VPC- subnet -security group(firewall)- user(ec2-user)/roles/policy[ec2] secret key is stored privately.can be public.
+RDS: internet - VPC- subnet -security group(firewall)- user(DB user created during creation)has roles/policy.can make public available.
+S3: internet - VPC- subnet -security group(firewall)- no user created for this s3 linux machine. so, user with security key and s3 access role can access. or create role  and attach ec2 so that it can access.[s3] in s3 we can restrict who to access bucket rule.
+
+
+1 modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group--not working
 doubt::: in ec2 we add iam role(s3fullaccess) so that we connected to s3. In S3 also we can restrict who can access. how rds didnt follow such step.
 2 we can use SSH tunnelling. EC2 is publically accessable. From workbench, Standard TCP/IP over SSH option. give EC2 detail and my sql detail. idea is from EC2 we can connect mysql. may be both mysql and ec2 in same subnet group.
-3 we can set as public while creating rds. then connect using workbench. vpc -rdslaunch wizaard is used in youtube video instead of default.
+3 we can set as public while creating rds. then connect using workbench. vpc -rdslaunch wizaard is used in youtube video instead of default.--working fro home.
+4 in ec2. > mysql -h host -u user -p pass....guess need to install mysql client in it
 
 ### RDP Multi AZ & Read replica -- must questions in this segment
 2 Types of backups: 
@@ -179,7 +185,10 @@ Topic not covered::: elastic cached
 S3 - storage service . not region specific global so name also unique for globally.
 storage of object based (key- file id and value-data). unlimited storage. spread across region for backup automatically. allows versioning.
 data consistency : when upload file it is availble instantly. when update or delete it takes some tiem to reflect.
-access for S3 : 
+access for S3 :
+S3: internet - VPC- subnet -security group(firewall)- no user created for this s3 linux machine. so, user with security key and s3 access role can access. or create role  and attach ec2 so that it can access.[s3] in s3 we can restrict who to access bucket rule.
+
+
 default access is private(only owner has access). 
 how others resource like ec2 or person can access S3? 
 S3 and EC2 are different resources in AWS. 
@@ -191,7 +200,7 @@ how one s3 access other resource?
 1. using CORS we can share the resources
 2. 
 
-#### encryption while upload 
+#### encryption while upload- imp for s3 exam 
 if sirverside encryption mandate in upload time, 
 x-amz-server-side-encryption header is used in PUT request.
 2 encryption:
