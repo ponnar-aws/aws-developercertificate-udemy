@@ -147,9 +147,9 @@ wget s3://<../connect.php>
 Note: this auto script is not woring for me. And php is also couldnt complete.
 I needed to restart the instance to see php installed.
 #### connectin rds from ec2
-EC2 :internet - VPC- subnet -security group(firewall)- user(ec2-user)/roles/policy[ec2] secret key is stored privately.can be public.
-RDS: internet - VPC- subnet -security group(firewall)- user(DB user created during creation)has roles/policy.can make public available.
-S3: internet - VPC- subnet -security group(firewall)- no user created for this s3 linux machine. so, user with security key and s3 access role can access. or create role  and attach ec2 so that it can access.[s3] in s3 we can restrict who to access bucket rule.
+1.EC2 :internet - VPC- subnet -security group(firewall)- user(ec2-user)/roles/policy[ec2] secret key is stored privately.can be public.
+2. RDS: internet - VPC- subnet -security group(firewall)- user(DB user created during creation)has roles/policy.can make public available.
+3. S3: internet - VPC- subnet -security group(firewall)- no user created for this s3 linux machine. so, user with security key and s3 access role can access. or create role  and attach ec2 so that it can access.[s3] in s3 we can restrict who to access bucket rule.
 
 
 1 modify the security group of RDS. add inbound and modify to add security group of ec2. Connection to establish bw one security group to other security group--not working
@@ -182,9 +182,10 @@ Tip: when to use memcached or redis?
 Topic not covered::: elastic cached
 
 ## S3 storage
-S3 - storage service . not region specific global so name also unique for globally.
+- S3 - storage service . not region specific global so name also unique for globally.
 storage of object based (key- file id and value-data). unlimited storage. spread across region for backup automatically. allows versioning.
-data consistency : when upload file it is availble instantly. when update or delete it takes some tiem to reflect.
+  - data consistency : when upload file it is availble instantly. when update or delete it takes some tiem to reflect.
+  
 access for S3 :
 S3: internet - VPC- subnet -security group(firewall)- no user created for this s3 linux machine. so, user with security key and s3 access role can access. or create role  and attach ec2 so that it can access.[s3] in s3 we can restrict who to access bucket rule.
 
