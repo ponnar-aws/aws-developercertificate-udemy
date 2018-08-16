@@ -227,5 +227,40 @@ volume gateway - migration helpful. some process in on premise other in aws.
 ## Serverless computing
 
 
+## KMS service
 
+## SQS 
+oldest service of AWS. so must question in exam. it is webservice to queuing service.
+->put the message in SQS->some service like ec2 polls the messages and process
+- SQS is pull based not push based. default retention is 4 days. canbe 1 min to 14 days.
+- invisiblity time is when picked by consumer but not processed yet. default invisiblity time is 30sec. max 12 hrs. after the timeout msg is visible again to process.
+- can auto scale based on message size
+- message can be 256kb of any format
+- can be consumed programitically sqs API
+- helps to decouple the application
+- can be used as buffer if producer or consumer is slow or intermittent
+- 2 types: 1. standard queue (default) limited transaction, order is not quaranteed though usually same as order of insertion.
+  2.FIFO type : 300 transaction per sec. first in first out. no duplicate messages . it is available till cunsumer process and deletes the message.
+  
+## SNS simple notification service
+- send notification from cloud to subscriber. ie to any http endpoints like mobile devices like android, apple, or sms or email or sqs or even lamda function
+- one topic can congigure to push only all android , apple device etc
+- push based system. publish-subscribe or pub-sub model
+- pricing -> .50$ for 1 million amazon requests / .06$ for 100000 notifications over http/ .75$ for 100 sms / 2$ for 100000 email notification
+- very simple API needed to implement push system in our application
 
+## SES simple email service
+- also messaging service like sns. mostly for marketing email . 
+- it also able to receive incoming email and move to s3.
+- no need to subscribe . mailId enough to send notification, where as for SNS topics to be subscribed.
+
+## Elastic beanstalk
+- service to deploy web applications, auto scale, load balance, app health built using java,.net,node etc. it has support for tomcat, nginx, etc. we need to configure the infrastructure depends on our requiement.
+- you has underlying ec2, s3, etc required for your application.
+- dont have ec2 terminal control but have all admin access to control it.
+- in exams -> elastic beans configurations - rolling updates & deployment tab - important
+- in exams -> EBS deployment policies important. 1. all at once(deploys new version in all instances.dwntime will be there) 2. rolling(deploys in batches. not ideal for mission sesitive applicaitons) 3. rolling with added batch policy(creates new batchs new autoscaling grp. when everything ok switches to normal. useful for mission critical applicaiton. this also requires  further rolling updates when rollback.) 4.immutable
+- lab: we can test the above scenerios. there is option 'application version'-> we can upload the code and deploy. this deploy is actually rolling deploy. so, in configuration we can select type of deploy (all in once, immutable, rolling , rolling added batch). this lab gives downtime to the application.
+- advanced topics:
+- can customise elastic beanstack environment with config file to configure resource like elastic load balancer etc- file can be json or yaml and must be inside the folder .ebextensions(shd be top level directory of application) and with the file ending .config. 
+- RDS with Elastic beanstalk : 2 ways - 1. within beanstalk envi 2. decouple the rds from beanstalk. advantage of having rds seperate: when ebs destroyed it destroys all resource including db rds also so decouple is best in prod. when rds is decoupled, 1. additional security grp to be created & 2. provide rds connection details to app server using beanstalk env properties. so that ec2 able to connect with rds resides outside.
