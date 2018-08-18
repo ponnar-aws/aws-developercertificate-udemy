@@ -250,6 +250,15 @@ oldest service of AWS. so must question in exam. it is webservice to queuing ser
 - pricing -> .50$ for 1 million amazon requests / .06$ for 100000 notifications over http/ .75$ for 100 sms / 2$ for 100000 email notification
 - very simple API needed to implement push system in our application
 
+## CI/CD for developers in aws
+- CI/CD are best practises in software developemnt and deployment
+- frequent updates can be done without affecting the service
+- CI-focuses even small changes to be traced and into main repo once tested: coders ->code repository like git ->build management system(for each commits)->test framework(ensure commits didnt introduce new bugs to the code)
+- CD - continuous delivery(manual intervention is needed) : merged changes are automatically built,tested and prepared to release to stage /prod
+  from code repo/test framework ->deploy packaged app ->environments like stg/prod
+- CD continuous deployment :as soon as new code is tested and available it is available to the release. small changes are going to prod easily very fast.
+- 
+
 ## SES simple email service
 - also messaging service like sns. mostly for marketing email . 
 - it also able to receive incoming email and move to s3.
@@ -260,7 +269,7 @@ oldest service of AWS. so must question in exam. it is webservice to queuing ser
 - you has underlying ec2, s3, etc required for your application.
 - dont have ec2 terminal control but have all admin access to control it.
 - in exams -> elastic beans configurations - rolling updates & deployment tab - important
-- in exams -> EBS deployment policies important. 1. all at once(deploys new version in all instances.dwntime will be there) 2. rolling(deploys in batches. not ideal for mission sesitive applicaitons) 3. rolling with added batch policy(creates new batchs new autoscaling grp. when everything ok switches to normal. useful for mission critical applicaiton. this also requires  further rolling updates when rollback.) 4.immutable
+- in exams -> EBS deployment policies important. 1. all at once(deploys new version in all instances.dwntime will be there) 2. rolling(deploys in batches. not ideal for mission sesitive applicaitons) 3. rolling with added batch policy(creates new batchs new autoscaling grp. when everything ok switches to normal. useful for mission critical applicaiton. this also requires  further rolling updates when rollback.) 4.immutable- it also mains full capacity suits for mission critical apps.to rolback, just delete new instances and autoscale grp.
 - lab: we can test the above scenerios. there is option 'application version'-> we can upload the code and deploy. this deploy is actually rolling deploy. so, in configuration we can select type of deploy (all in once, immutable, rolling , rolling added batch). this lab gives downtime to the application.
 - advanced topics:
 - can customise elastic beanstack environment with config file to configure resource like elastic load balancer etc- file can be json or yaml and must be inside the folder .ebextensions(shd be top level directory of application) and with the file ending .config. 
