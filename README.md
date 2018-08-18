@@ -228,6 +228,7 @@ volume gateway - migration helpful. some process in on premise other in aws.
 
 
 ## KMS service
+- note - kms charged me 0.04$ after created. dont know the pricing in free tier.
 
 ## SQS 
 oldest service of AWS. so must question in exam. it is webservice to queuing service.
@@ -264,3 +265,19 @@ oldest service of AWS. so must question in exam. it is webservice to queuing ser
 - advanced topics:
 - can customise elastic beanstack environment with config file to configure resource like elastic load balancer etc- file can be json or yaml and must be inside the folder .ebextensions(shd be top level directory of application) and with the file ending .config. 
 - RDS with Elastic beanstalk : 2 ways - 1. within beanstalk envi 2. decouple the rds from beanstalk. advantage of having rds seperate: when ebs destroyed it destroys all resource including db rds also so decouple is best in prod. when rds is decoupled, 1. additional security grp to be created & 2. provide rds connection details to app server using beanstalk env properties. so that ec2 able to connect with rds resides outside.
+
+## Kinesis
+- Streaming data is data continuously generated and can be send to servers. eg: IOT devices which sends real data continuously, uber riding data etc
+- exam - ask the scenerio and pick which type of kinesis best suits?
+
+- 3 types: 
+1.kinesis streams - 24hrs max retention is 7 days
+- structure: producers(ec2/mobile/laptop)->list of shards-> consumers(ec2 usually which does some analysis, which inturn sends to db or s3 etc)
+- data capacity of streams based on shards number
+reads - 5 transaction/sec max of 2mb/sec
+write - 1000 records/sec max of 1mb/sec(include partitionkeys)
+2.kinesis firehose 
+- producers -> automated(no need to mention shards automatic only or data retention(ie no retention))->s3 or elasticsearch clusters only mostly
+3. kinesis analytics 
+- producers -> firehose + streams(able to run sql like queries) ->s3 or redshift or elastic search clusters.
+- lab: kinesis based cloudformation stack created from template given(https://s3.amazonaws.com/kinesis-demo-bucket/amazon-kinesis-data-visualization-sample/kinesis-data-vis-sample-app.template) it creates ec2 instance for producer and consumer, db to store the data, 2 shards- note shared shards cost me 0.1$ for 12 hrs
