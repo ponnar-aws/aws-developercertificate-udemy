@@ -12,6 +12,18 @@
 - default user created doesnt have any access(No permission) or policy attached to it.
 - access id and secret  key(availbale only once).
 
+### Advanced topics
+- web identity federation gives access to aws resources - by authenticating by identity providers like fb,google,amazon
+- Amazon cognito aws service - provides web identity federa. it gives sign up/sign in for mobile application and to access aws services. eg: mobile shopping application stores data in s3 and cognito helps to sync data even used in multiple devices.
+```
+cognito:
+user -> userpools(direct sign in or via amazon,google,fb) <-->jwt tokens <->amazon,google,fb etc
+user -> identity pools -> temp aws credentials
+user -> have access like s3
+```
+- cognito also tracks the number of devices logged in
+- cognito uses push syncroniisation to sync data in all devices. sns used behind to silently push notifications to sync
+- 
 ## EC2 Elastic compute cloud and EBS elastic block storage
 EC2 is simply a virtual machine with different RAM config depends on the usage. we can enter into the instance using SSH or programatically cli or any program.
 - default have 8 GB storage ssd. we can select 5 different storage disk.
@@ -290,3 +302,5 @@ write - 1000 records/sec max of 1mb/sec(include partitionkeys)
 3. kinesis analytics 
 - producers -> firehose + streams(able to run sql like queries) ->s3 or redshift or elastic search clusters.
 - lab: kinesis based cloudformation stack created from template given(https://s3.amazonaws.com/kinesis-demo-bucket/amazon-kinesis-data-visualization-sample/kinesis-data-vis-sample-app.template) it creates ec2 instance for producer and consumer, db to store the data, 2 shards- note shared shards cost me 0.1$ for 12 hrs
+
+
